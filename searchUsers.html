@@ -1,0 +1,47 @@
+
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"></link>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+</head>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      
+      <input type="text" class="form-control" placeholder="Search for..." id="Search">
+
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="Go">Go!</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+<div id="display">
+
+</div>
+
+
+<script>
+    $('#Go').on('click', function() {
+      var value = $('#Search').val();
+      $('#display').empty();
+    $.ajax({
+      url:"https://api.github.com/search/users?q="+value,
+      dataType: "jsonp",
+      success : function( returnData )
+      {
+        $.each( returnData.data.items, function( key, value ) {
+            // alert( u + ": " + value.login );
+            $('#display').append('<p>' + "user" + ": " + value.login + '</p>');
+        });
+      }
+            });
+  });
+
+  
+</script>
